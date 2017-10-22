@@ -39,16 +39,16 @@
 (eval-when (:compile-toplevel :load-toplevel)
 
 
-#+darwin (progn
-	   (defparameter *gfortran-lib* nil)
-	   (defparameter *blas-lib*
-	     "/System/Library/Frameworks/Accelerate.framework/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib")
-	   (defparameter *lapack-lib*
-	     "/System/Library/Frameworks/Accelerate.framework/Frameworks/vecLib.framework/Versions/A/libLAPACK.dylib"))
-#-darwin (progn
-	   (defparameter *gfortran-lib* "libgfortran.so.3")
-	   (defparameter *blas-lib* "libblas.so")
-	   (defparameter *lapack-lib* "liblapack.so"))
+  #+darwin (progn
+             (defparameter *gfortran-lib* nil)
+             (defparameter *blas-lib*
+               "/System/Library/Frameworks/Accelerate.framework/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib")
+             (defparameter *lapack-lib*
+               "/System/Library/Frameworks/Accelerate.framework/Frameworks/vecLib.framework/Versions/A/libLAPACK.dylib"))
+  #-darwin (progn
+             (defparameter *gfortran-lib* '(:or "libgfortran.so.3" "libgfortran.so.4"))
+             (defparameter *blas-lib* "libblas.so")
+             (defparameter *lapack-lib* "liblapack.so"))
 
 
   (defvar *blapack-libs-loaded* nil)
